@@ -6,11 +6,11 @@
 /*   By: cagarci2 <cagarci2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:56:35 by cagarci2          #+#    #+#             */
-/*   Updated: 2024/03/27 11:19:38 by cagarci2         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:21:34 by cagarci2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 static int	delimiter(char const *str, char c, int i)
 {
@@ -55,7 +55,7 @@ char	**ft_split(const char *str, char c)
 
 	wrds = count_words(str, c);
 	result = (char **) malloc(sizeof(char *) * (wrds + 1));
-	if (!str || !result)
+	if (!result)
 		return (NULL);
 	i = 0;
 	j = 0;
@@ -64,10 +64,7 @@ char	**ft_split(const char *str, char c)
 		i = next_word(str, c, i);
 		result[j] = ft_substr(str, i, delimiter(str, c, i) - i);
 		if (!result[j])
-		{
-			ft_free(result);
-			return (NULL);
-		}
+			return (ft_free(result), NULL);
 		i = delimiter(str, c, i);
 		j++;
 	}
